@@ -1,0 +1,47 @@
+name: Sphinx documentation
+
+on:
+  push:
+    branches-ignore:
+    - 'wip.*'
+    - 'pr.*'
+    tags:
+    - '*'
+  release:
+    types: [published, created, released]
+  pull_request:
+    branches:
+    - '*'
+
+jobs:
+  build:
+    # https://docs.github.com/en/actions/reference/runners/github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+    runs-on: ubuntu-24.04
+
+    steps:
+    # - https://github.com/actions/checkout
+    - uses: actions/checkout@v5
+      with:
+        submodules: true
+
+    - name: Setup Python virtual environment
+      run: python3 ./doc/setup_venv.py
+
+    - name: Build Sphinx documentation
+      run: python3 ./doc/run_build.py
+
+    - name: Push to deploy branch
+      working-directory: ${{ github.workspace }}
+      if: ${{ github.ref == 'refs/heads/master' }}
+      run: |
+        mv doc/_build/ __generated_html/
+        rm -rf doc/
+        mv __generated_html/ doc/
+        touch .nojekyll doc/.nojekyll # https://stackoverflow.com/a/62967771
+        # No PDF, error: "File doc/*.pdf is 137.68 MB; this exceeds GitHub's file size limit of 100.00 MB"
+        git add doc/ .nojekyll
+        git config user.email "x@ruslo.dev" # People with admin or maintainer permissions...
+        git config user.name "Ruslan Baratov"
+        git commit -m '[GitHub Action] Deploy documentation'
+        git checkout -b html_deploy
+        git push -f origin html_deploy:html_deploy
