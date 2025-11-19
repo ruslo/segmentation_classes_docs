@@ -5,6 +5,12 @@
 
 import os
 import packaging
+import sys
+
+sys.path.append(os.path.abspath('directives'))
+
+# Custom directives
+from youtube import YouTube
 
 # on_rtd is whether we are on readthedocs.org
 # this line of code grabbed from docs.readthedocs.org
@@ -44,6 +50,9 @@ exclude_patterns = [
   '_build', '_venv', 'readme.rst', 'Thumbs.db', '.DS_Store',
   'samples/README.rst'
 ]
+
+# Add custom directives
+extensions.append('youtube')
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
