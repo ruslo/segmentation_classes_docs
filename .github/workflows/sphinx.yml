@@ -36,10 +36,11 @@ jobs:
       run: |
         mv doc/_build/ __generated_html/
         rm -rf doc/
-        mv __generated_html/ doc/
-        touch .nojekyll doc/.nojekyll # https://stackoverflow.com/a/62967771
-        # No PDF, error: "File doc/*.pdf is 137.68 MB; this exceeds GitHub's file size limit of 100.00 MB"
-        git add doc/ .nojekyll
+        # Settings -> Pages -> Build and deployment: It's either '/' or '/docs'
+        mv __generated_html/ docs/
+        touch .nojekyll docs/.nojekyll # https://stackoverflow.com/a/62967771
+        # No PDF, error: "File docs/*.pdf is 137.68 MB; this exceeds GitHub's file size limit of 100.00 MB"
+        git add docs/ .nojekyll
         git config user.email "x@ruslo.dev" # People with admin or maintainer permissions...
         git config user.name "Ruslan Baratov"
         git commit -m '[GitHub Action] Deploy documentation'
