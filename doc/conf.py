@@ -4,13 +4,17 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 import os
-import packaging
 import sys
+from pathlib import Path
 
-sys.path.append(os.path.abspath('directives'))
+import packaging
+
+directives_dir = Path(__file__).absolute().parent / 'directives'
+sys.path.append(str(directives_dir))
 
 # Custom directives
-from youtube import YouTube
+# pylint: disable=unused-import,wrong-import-position
+from youtube import YouTube # used below in 'extensions'
 
 # on_rtd is whether we are on readthedocs.org
 # this line of code grabbed from docs.readthedocs.org

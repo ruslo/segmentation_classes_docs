@@ -26,6 +26,7 @@ jobs:
       run: |
         python3 ./doc/setup_venv.py
         echo "${PWD}/doc/_venv/bin/" >> $GITHUB_PATH
+        echo "PYTHONPATH=${PWD}/doc/directives/:${PYTHONPATH}" >> $GITHUB_ENV
 
     - name: Check setup_venv.py
       run: pylint --rcfile=doc/.pylintrc doc/setup_venv.py

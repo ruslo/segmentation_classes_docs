@@ -1,9 +1,12 @@
+"""YouTube directive"""
+
+from typing import Any
 from docutils import nodes
 from docutils.parsers.rst import Directive
 from sphinx.application import Sphinx
-from typing import List, Any
 
 class YouTube(Directive):
+  """YouTube directive"""
   # Define what the directive accepts
   has_content = True
   required_arguments = 1
