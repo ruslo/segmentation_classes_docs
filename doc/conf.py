@@ -42,6 +42,7 @@ version = f'{version.major}.{version.minor}'
 extensions = []
 
 extensions.append('sphinx_immaterial.kbd_keys')
+extensions.append('sphinxcontrib.video')
 
 if not on_rtd:
   extensions.append('sphinxcontrib.spelling')
