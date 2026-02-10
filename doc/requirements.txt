@@ -12,7 +12,7 @@ sphinx-immaterial[keys]==0.13.8
 packaging
 
 # https://github.com/pylint-dev/pylint
-pylint==4.0.3
+pylint==4.0.4
 
 # https://pypi.org/project/sphinxcontrib-video
 sphinxcontrib-video==0.4.1
