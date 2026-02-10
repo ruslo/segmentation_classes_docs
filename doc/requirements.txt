@@ -15,4 +15,4 @@ packaging
 pylint==4.0.4
 
 # https://pypi.org/project/sphinxcontrib-video
-sphinxcontrib-video==0.4.1
+sphinxcontrib-video==0.4.2
